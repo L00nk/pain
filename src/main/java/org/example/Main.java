@@ -7,6 +7,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -56,6 +58,24 @@ public class Main extends JFrame {
 
         jPanel = new JPanel();
         jPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 60, 5));
+
+        //insert focus
+        jTable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_INSERT, 0), "insertAction");
+        jTable.getActionMap().put("insertAction", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedRow = jTable.getSelectedRow();
+                int selectedColumn = jTable.getSelectedColumn();
+
+                if (selectedRow >= 0 && selectedColumn >= 0) {
+                    jTable.editCellAt(selectedRow, selectedColumn);
+                    Component editor = jTable.getEditorComponent();
+                    if (editor != null) {
+                        editor.requestFocusInWindow();
+                    }
+                }
+            }
+        });
 
         importButton = new JButton("Importuj z pliku txt");
         importButton.addActionListener(e -> {

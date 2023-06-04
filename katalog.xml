@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<laptops moddate="2023-06-04 20:08">
+<laptops moddate="2023-06-05 00:17">
     <laptop>
         <manufacturer>Dell</manufacturer>
         <screen touch="nie">
@@ -93,7 +93,7 @@
         <disc_reader>brak</disc_reader>
     </laptop>
     <laptop>
-        <manufacturer>Sony</manufacturer>
+        <manufacturer>MSI</manufacturer>
         <screen touch="tak">
             <size>17"</size>
             <resolution>1600x900</resolution>
