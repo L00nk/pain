@@ -52,15 +52,16 @@ public class Auto extends JFrame {
                             JOptionPane.INFORMATION_MESSAGE);
                 }
                 else {
-                    AutoHelper.click(60,70);
+                    Robot robot = new Robot();
+                    AutoHelper.click(60,70,robot);
                     Thread.sleep(20);
-                    changeForm(80,180);
+                    changeForm(80,180,robot);
                     Thread.sleep(20);
-                    AutoHelper.click(200,30);
+                    AutoHelper.click(200,30,robot);
                     Thread.sleep(20);
-                    filterFormP();
+                    filterFormP(robot);
                     Thread.sleep(200);
-                    filterFormM();
+                    filterFormM(robot);
                     Thread.sleep(2000);
 
                 }
@@ -107,10 +108,11 @@ public class Auto extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-    public void changeForm(int x, int y) throws AWTException, InterruptedException, IOException, UnsupportedFlavorException {
-        Robot robot = new Robot();
-        AutoHelper.click(90,120);
-        AutoHelper.click(x,y);
+    public void changeForm(int x, int y,Robot robot) throws AWTException, InterruptedException, IOException, UnsupportedFlavorException {
+        //Robot robot = new Robot();
+        AutoHelper.click(90,120,robot);
+        AutoHelper.click(x,y,robot);
+
 
         //zejście do wybranego wiersza za pomcą strzałek
         int recordNumber = Integer.parseInt(recordText.getText());
@@ -119,8 +121,7 @@ public class Auto extends JFrame {
             robot.keyRelease(KeyEvent.VK_DOWN);
             Thread.sleep(200);
         }
-        Thread.sleep(2000);
-
+        Thread.sleep(200);
         int index = 0;
         for (CheckboxHelper checkboxHelper: checkboxHelperList){
             if(index == 0 || index == 3)
@@ -155,7 +156,7 @@ public class Auto extends JFrame {
                         {
                             producent = text;
                         }
-                        else if (index == 3)
+                        else
                         {
                             matryca = text;
                         }
@@ -170,61 +171,61 @@ public class Auto extends JFrame {
 
             if(!checkboxHelper.getCheckBox().isSelected())
             {
-                AutoHelper.goRight();
+                AutoHelper.goRight(robot);
                 Thread.sleep(200);
             }
             else
             {
                 String text = checkboxHelper.getTextField().getText();
                 //System.out.print(text);
-                AutoHelper.deleteText();
+                AutoHelper.deleteText(robot);
                 Thread.sleep(20);
-                AutoHelper.write(text);
+                AutoHelper.write(text,robot);
                 Thread.sleep(20);
-                AutoHelper.goRight();
+                AutoHelper.goRight(robot);
                 Thread.sleep(200);
             }
             index++;
         }
         if(xmlCheckBox.isSelected())
         {
-            AutoHelper.click(800,120);
+            AutoHelper.click(800,120,robot);
             Thread.sleep(200);
-            AutoHelper.click(750,450);
+            AutoHelper.click(750,450,robot);
             Thread.sleep(200);
         }
-        AutoHelper.click(1200,130);
+        AutoHelper.click(1200,130,robot);
         Thread.sleep(200);
-        AutoHelper.click(750,450);
+        AutoHelper.click(750,450,robot);
         Thread.sleep(200);
-        AutoHelper.click(1000,130);
+        AutoHelper.click(1000,130,robot);
         //index = 0;
         Thread.sleep(200);
     }
-    public void filterFormP() throws AWTException, InterruptedException {
+    public void filterFormP(Robot robot) throws AWTException, InterruptedException {
 
-        Robot robot = new Robot();
-        AutoHelper.click(550,70);
+        //Robot robot = new Robot();
+        AutoHelper.click(550,70,robot);
         Thread.sleep(200);
 
         String filterProd = checkboxHelperList.get(0).getTextField().getText();
 
-        if(Objects.equals(filterProd, "") || filterProd == null || !Objects.equals(producent, ""))
+        if(!filterProd.equals(""))
         {
-            AutoHelper.write(producent.substring(0,3));
+            AutoHelper.write(filterProd,robot);
             Thread.sleep(200);
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(200);
-            AutoHelper.click(650,70);
+            AutoHelper.click(650,70,robot);
         }
-        else if (!Objects.equals(filterProd, "")){
-            AutoHelper.write(filterProd.substring(0,3));
+        else if (filterProd.equals("") && !Objects.equals(producent, "")){
+            AutoHelper.write(producent,robot);
             Thread.sleep(200);
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(200);
-            AutoHelper.click(650,70);
+            AutoHelper.click(650,70,robot);
         }
         else
         {
@@ -237,38 +238,38 @@ public class Auto extends JFrame {
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(200);
             //AutoHelper.click(470,70);
-            AutoHelper.click(650,70);
+            AutoHelper.click(650,70,robot);
         }
 
 
     }
-    public void filterFormM() throws AWTException, InterruptedException {
+    public void filterFormM(Robot robot) throws AWTException, InterruptedException {
 
-        Robot robot = new Robot();
-        AutoHelper.click(900,70);
+        //Robot robot = new Robot();
+        AutoHelper.click(900,70,robot);
         Thread.sleep(200);
 
 
         String filterMat = checkboxHelperList.get(3).getTextField().getText();
 
-        if(Objects.equals(filterMat, "") || filterMat == null || !Objects.equals(matryca, ""))
+        if(!filterMat.equals(""))
         {
-            AutoHelper.write(matryca.substring(0,3));
+            AutoHelper.write(filterMat,robot);
             Thread.sleep(200);
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(200);
-            AutoHelper.click(1000,70);
+            AutoHelper.click(1000,70,robot);
+
         }
-        else{
-            AutoHelper.write(filterMat.substring(0,3));
+        else if(filterMat.equals("") && !Objects.equals(matryca, "")){
+            AutoHelper.write(matryca,robot);
             Thread.sleep(200);
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(200);
-            AutoHelper.click(1000,70);
+            AutoHelper.click(1000,70,robot);
         }
-        /*
         else
         {
             for (int i = 0; i < 2; i++) {
@@ -279,10 +280,10 @@ public class Auto extends JFrame {
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER);
             Thread.sleep(200);
-            AutoHelper.click(1000,70);
+            AutoHelper.click(1000,70,robot);
         }
 
-         */
+
 
     }
     public static void main(String[] args){

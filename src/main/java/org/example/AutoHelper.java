@@ -7,19 +7,16 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 public class AutoHelper {
-    public static void click(int x, int y) throws AWTException {
-        Robot bot = new Robot();
-        bot.mouseMove(x, y);
-        bot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
-        bot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
+    public static void click(int x, int y, Robot robot) throws AWTException {
+        robot.mouseMove(x, y);
+        robot.mousePress(InputEvent.BUTTON1_DOWN_MASK);
+        robot.mouseRelease(InputEvent.BUTTON1_DOWN_MASK);
     }
-    public static void goRight() throws AWTException {
-        Robot robot = new Robot();
+    public static void goRight(Robot robot) throws AWTException {
         robot.keyPress(KeyEvent.VK_RIGHT);
         robot.keyRelease(KeyEvent.VK_RIGHT);
     }
-    public static void deleteText() throws AWTException {
-        Robot robot = new Robot();
+    public static void deleteText(Robot robot) throws AWTException {
         for(int i = 0; i<25; i++)
         {
             robot.keyPress(KeyEvent.VK_BACK_SPACE);
@@ -27,12 +24,7 @@ public class AutoHelper {
         }
 
     }
-    public static void write(String text) throws AWTException, InterruptedException {
-        StringSelection stringSelection = new StringSelection(text);
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(stringSelection, stringSelection);
-
-        Robot robot = new Robot();
+    public static void write(String text, Robot robot) throws AWTException, InterruptedException {
         for (int i = 0; i < text.length(); i++)
         {
             //Getting current char

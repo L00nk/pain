@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<laptops moddate="2023-06-05 00:17">
+<laptops moddate="2023-06-05 00:52">
     <laptop>
         <manufacturer>Dell</manufacturer>
         <screen touch="nie">
@@ -35,7 +35,7 @@
             <physical_cores>4</physical_cores>
             <clock_speed>brak danych</clock_speed>
         </processor>
-        <ram>16GB</ram>
+        <ram>5GB</ram>
         <disc type="SSD">
             <storage>120GB</storage>
         </disc>
